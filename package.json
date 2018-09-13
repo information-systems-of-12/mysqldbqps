@@ -1,6 +1,6 @@
 {
   "name": "iso12-mysqldbqps",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "MYSQL database query perform service",
   "main": "./functions/main.mjs",
   "scripts": {
