@@ -199,7 +199,7 @@ export default async ( tableWrapper, options ) => {
   `
   // debugger
   
-  const results = await executeQuery( { connection, manualMode, actionTypes, actionType: actionTypes.select, prepareQueryString, query } )
+  const results = await executeQuery( { connection, manualMode, actionTypes, actionType: actionTypes.SELECT, prepareQueryString, query } )
 
   const deleteIntoFieldNameFromKey = ( key, intoField ) => {
     return key.replace( intoField + '__', '' )

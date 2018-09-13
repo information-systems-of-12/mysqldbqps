@@ -8,7 +8,7 @@ export default connectionPool => {
           // reject( error )
           throw error
         } else {
-          resolve( connection )
+          return resolve( connection )
         }
   
       } )

@@ -187,7 +187,8 @@ export default async ( tableWrapper, options ) => {
       connection,
       manualMode,
       actionTypes,
-      actionType: updateMany === false ? actionTypes.updateOne : actionTypes.updateMany,
+      // actionType: updateMany === false ? actionTypes.updateOne : actionTypes.updateMany,
+      actionType: actionTypes.UPDATE,
       query,
       parameters: {}
 

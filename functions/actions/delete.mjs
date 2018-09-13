@@ -81,7 +81,7 @@ export default async ( tableWrapper, options ) => {
       ${ whereString !== '' && !customWhereString ? `WHERE ${ whereString }` : '' }
       ${ !limit ? 'LIMIT 1' : `LIMIT ${ limit }` }
     `
-    const results = await executeQuery( { connection, manualMode, actionTypes, actionType: actionTypes.select, prepareQueryString, query } )
+    const results = await executeQuery( { connection, manualMode, actionTypes, actionType: actionTypes.DELETE, prepareQueryString, query } )
 
     // if ( limit === 1 && !page ){
 

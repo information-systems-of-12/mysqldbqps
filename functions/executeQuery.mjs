@@ -18,7 +18,7 @@ export default ( { connection, manualMode = false, actionTypes, actionType = nul
 
       connection.query( query, parameters, ( error, results, fields ) => {
 
-        if ( error ) reject( error )
+        if ( error ) throw error
 
         if ( !manualMode ) connection.release()
 
@@ -49,13 +49,13 @@ export default ( { connection, manualMode = false, actionTypes, actionType = nul
 
         }
 
-        resolve( performResult )
+        return resolve( performResult )
         
       })
 
     } catch ( error ) {
       
-      reject( error )
+      throw error
 
     }
 

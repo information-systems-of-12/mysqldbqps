@@ -42,7 +42,8 @@ export const TYPES = {
     SELECT: 'SELECT',
     INSERT: 'INSERT',
     UPDATE: 'UPDATE',
-    DELETE: 'DELETE'
+    DELETE: 'DELETE',
+    RAW: 'RAW'
   },
   SIGNS: {
     EQUAL: '=',

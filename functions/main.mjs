@@ -10,6 +10,7 @@ import select from './actions/select.mjs'
 import insert from './actions/insert.mjs'
 import update from './actions/update.mjs'
 import delete_ from './actions/delete.mjs'
+import raw from './actions/raw.mjs'
 
 import { TYPES, DEVELOPMENT_NODE_ENV, STAGING_NODE_ENV, PRODUCTION_NODE_ENV } from './constants.mjs'
 
@@ -71,7 +72,32 @@ export default async parameters => {
       actions: {
 
         getConnectionFromConnectionPool: async () => await getConnectionFromConnectionPool( connectionPool ),
-        
+
+
+
+        raw: async ( query, _parameters = {} ) => await raw( 
+          query,
+          Object.assign( _parameters, {
+
+              constants,
+
+              connectionPool,
+              getConnectionFromConnectionPool,
+
+              actionTypes: constants.TYPES.ACTIONS,
+              joinTypes: constants.TYPES.JOIN,
+              orderTypes: constants.TYPES.ORDER,
+              signTypes: constants.TYPES.SIGNS,
+    
+              
+              executeQuery,
+
+              tableWrappers
+
+            }
+          )
+        ),
+
         select: async ( tableWrapper, _parameters ) => await select(
 
           tableWrapper,
