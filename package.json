@@ -1,0 +1,24 @@
+{
+  "name": "iso12-mysqldbqps",
+  "version": "1.0.0",
+  "description": "MYSQL database query perform service",
+  "main": "./functions/main.mjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com:information-systems-of-12/mysqldbqps.git"
+  },
+  "keywords": [
+    "mysql",
+    "query"
+  ],
+  "author": "Artem Gruden",
+  "license": "MIT",
+  "homepage": "https://github.com/information-systems-of-12/mysqldbqps#readme",
+  "dependencies": {
+    "mysql": "^2.16.0"
+  }
+
+}
