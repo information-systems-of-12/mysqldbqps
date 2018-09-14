@@ -30,8 +30,8 @@ export default async ( query, options ) => {
   }
 
 
-  const results = await executeQuery( { connection, manualMode, actionTypes, actionType: actionTypes.RAW, query } )
+  const result = await executeQuery( { connection, manualMode, actionTypes, actionType: actionTypes.RAW, query } )
 
-  return results[ 0 ]
+  return result
 
 }
