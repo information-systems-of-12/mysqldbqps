@@ -6,9 +6,9 @@ export default ( connection, tableName, orderByParameters, strictMode )=> {
 
     if ( value ){
       if ( !Array.isArray( value ) ){
-        orderByStringArray.push( `${ value } ${ key }` )
+        orderByStringArray.push( `${ key } ${ value }` )
       } else {
-        orderByStringArray.push( `${ value.join( ', ' ) } ${ key }` )
+        orderByStringArray.push( `${ key.join( ', ' ) } ${ value }` )
       }
     } else {
       break

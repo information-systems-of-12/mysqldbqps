@@ -200,6 +200,7 @@ export default async ( tableWrapper, options ) => {
   // debugger
   
   const results = await executeQuery( { connection, manualMode, actionTypes, actionType: actionTypes.SELECT, prepareQueryString, query } )
+  // debugger
 
   const deleteIntoFieldNameFromKey = ( key, intoField ) => {
     return key.replace( intoField + '__', '' )
@@ -262,8 +263,67 @@ export default async ( tableWrapper, options ) => {
 
     }
 
-    f = results.map( r => {
-      
+    if ( results && Array.isArray( results ) ){
+      // debugger
+      f = results.map( r => {
+        
+        let o = {}
+
+
+        for ( const p of plain ){
+          recursiveObjectCreateField( o, p.parent, p.intoField )
+        }
+
+
+        for ( const [ key, value ] of Object.entries( r ) ){
+          
+          if ( key.startsWith( tableName ) ){
+
+            if ( !plain.some( p => p.columnName === deleteIntoFieldNameFromKey( key, tableName ) ) ){
+              o[ deleteIntoFieldNameFromKey( key, tableName ) ] = value
+            }
+            
+          } else {
+
+            for ( const p of plain ){
+
+
+
+              if ( !plain.some( p => p.columnName === deleteIntoFieldNameFromKey( key, p.parent ) ) ){
+                
+                if ( p.parent === null ){
+          
+                  if ( key.startsWith( p.intoField + '__' ) ){
+                    o[ p.intoField ] [ deleteIntoFieldNameFromKey( key, p.intoField ) ] = value
+                  }
+                  
+
+                } else {
+
+                  if ( deleteIntoFieldNameFromKey( key, p.intoField ) !== p.columnName ){
+                    recursiveObjectInsertToField( o, p.parent, p.columnName, p.intoField, key, value )
+                  }
+                  
+                }
+              }
+              
+            }
+            
+            
+          }
+
+        }
+        
+        return o
+        
+
+      } )
+
+
+
+    } else {
+
+
       let o = {}
 
 
@@ -272,7 +332,7 @@ export default async ( tableWrapper, options ) => {
       }
 
 
-      for ( const [ key, value ] of Object.entries( r ) ){
+      for ( const [ key, value ] of Object.entries( results ) ){
         
         if ( key.startsWith( tableName ) ){
 
@@ -311,10 +371,11 @@ export default async ( tableWrapper, options ) => {
 
       }
       
-      return o
-      
+      f = o
 
-    })
+
+    }
+    
 
 
 
@@ -323,9 +384,9 @@ export default async ( tableWrapper, options ) => {
     f = results
 
   }
+  
 
-
-  if ( limit === 1 && !page ){
+  if ( limit === 1 && !page && f && f.length > 0 ){
 
     return f[ 0 ]
 
