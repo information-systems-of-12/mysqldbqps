@@ -20,7 +20,7 @@ export default ( connection, tableName, parameters, strictMode, joinModeIsUsing 
 
     // debugger
       
-    if ( value !== undefined && Object.getPrototypeOf( value ).constructor.name === ES_PROTOTYPES.OBJECT ){
+    if ( value !== undefined && value !== null && Object.getPrototypeOf( value ).constructor.name === ES_PROTOTYPES.OBJECT ){
 
       const sign = Object.keys( value )[ 0 ]
       const detailValue = value[ sign ]

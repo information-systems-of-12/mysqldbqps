@@ -18,38 +18,59 @@ export default ( { connection, manualMode = false, actionTypes, actionType = nul
 
       connection.query( query, parameters, ( error, results, fields ) => {
 
-        if ( error ) throw error
-
-        if ( !manualMode ) connection.release()
-
-        let performResult = null
-
-
-        switch ( actionType ) {
-
-          case SELECT:
-            performResult = limitOne === false ? results && results.length ? results[ 0 ] : null : results[ 0 ]
-            break
-
-          case UPDATE:
-            performResult = results
-            break
-
-          case INSERT:
-            performResult = results
-            break
-
-          case DELETE:
-            performResult = results
-            break
-
-          default:
-            performResult = results
-            break
-
+        if ( error ) {
+          throw error
         }
 
-        return resolve( performResult )
+        if ( !manualMode ) {
+          connection.release()
+        }
+
+        return resolve( results )
+
+        // let performResult = null
+
+
+        // switch ( actionType ) {
+
+        //   case SELECT:
+        //     // debugger
+        //     // if ( limitOne === false ){
+        //     //   if ( results && Array.isArray( results ) && results.length > 0 ){
+        //     //     performResult = results
+        //     //   } else {
+        //     //     performResult = null
+        //     //   }
+              
+        //     // } else if ( limitOne === true ){
+        //     //   if ( results && Array.isArray( results ) ){
+        //     //     performResult = results[ 0 ]
+        //     //   }
+              
+        //     // }
+        //     // performResult = limitOne === false ? results && results.length ? results[ 0 ] : null : results[ 0 ]
+        //     performResult = results
+        //     break
+
+        //   case UPDATE:
+        //     performResult = results
+        //     break
+
+        //   case INSERT:
+        //     performResult = results
+        //     break
+
+        //   case DELETE:
+        //     performResult = results
+        //     break
+
+        //   default:
+        //     performResult = results
+        //     break
+
+        // }
+
+        // return resolve( performResult )
         
       })
 

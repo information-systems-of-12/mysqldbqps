@@ -193,14 +193,14 @@ export default async ( tableWrapper, options ) => {
 
     ${ skip && !page ? `LIMIT ${ limit } OFFSET ${ skip }` : '' }
     ${ limit && page ? `LIMIT ${ limit } OFFSET ${ ( page - 1 ) * limit }` : '' }
-
-    ${ limit === 1 && !page === null ? 'LIMIT 1' : '' }
+    ${ limit === 1 && page === null ? 'LIMIT 1' : '' }
+    
 
   `
-  // debugger
+
+  // ${ limit === 1 && !page === null ? 'LIMIT 1' : '' }
   
   const results = await executeQuery( { connection, manualMode, actionTypes, actionType: actionTypes.SELECT, prepareQueryString, query } )
-  // debugger
 
   const deleteIntoFieldNameFromKey = ( key, intoField ) => {
     return key.replace( intoField + '__', '' )
