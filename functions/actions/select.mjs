@@ -386,9 +386,14 @@ export default async ( tableWrapper, options ) => {
   }
   
 
-  if ( limit === 1 && !page && f && f.length > 0 ){
+  if ( limit === 1 && !page && f && Array.isArray( f ) ){
 
-    return f[ 0 ]
+    if ( f.length > 0 ){
+      return f[ 0 ]
+    }
+
+    return null
+    
 
   } else {
 
